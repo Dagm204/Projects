@@ -5,7 +5,7 @@ import java.awt.event.*;
 
 public class Calculator extends JFrame {
 	
-    // Start Date: (12/16/21) - End date: DD/MM/YY)  Updates(0);
+    // Start Date: (12/16/21) - End date: 12/30/21)  Updates(1);
 	
 	static JFrame frame;
 	static JButton per, CE, C, del, OneOverX, XSquared, SquareRoot, div, mul, sub, add, equal, dec, neg, zero, one, 
@@ -136,6 +136,7 @@ public class Calculator extends JFrame {
 				
 				perOpener = true; 
 				
+				if(!(entry.getText().toString().equals(""))) {
 				e_entry = entry.getText().toString();
 				t_text = text.getText().toString();
 				calcper = Double.valueOf(t_text);
@@ -174,6 +175,12 @@ public class Calculator extends JFrame {
 				}
 				else
 					entry.setText("0");
+					text.setText("");
+			}
+				else if(!(text.getText().toString().equals(""))) {
+					entry.setText("0");
+					text.setText("");
+				}
 			}
 		});
 		CE.addActionListener(new ActionListener() {
@@ -426,13 +433,6 @@ public class Calculator extends JFrame {
 				divOpener = false; 
 				perOpener = false; 
 				
-				if (counter>=1) {
-					if((!(entry.getText().substring(entry.getText().toString().length()-1)).equals("+")) || (!(entry.getText().toString().substring(entry.getText().toString().length()-1)).equals("-")) || ((entry.getText().toString().substring(entry.getText().toString().length()-1)).equals("×")) || (!(entry.getText().toString().substring(entry.getText().toString().length()-1)).equals("÷"))) {
-						if(!(text.getText().toString().equals(""))) 
-							counter =0; 
-					}
-				}
-				
 				if(entry.getText().toString().equals("Infinity")) {
 					entry.setText("");
 					counter=0;
@@ -469,12 +469,6 @@ public class Calculator extends JFrame {
 				divOpener = false; 
 				perOpener = false; 
 				
-				if (counter>=1) {
-					if((!(entry.getText().substring(entry.getText().toString().length()-1)).equals("+")) || (!(entry.getText().toString().substring(entry.getText().toString().length()-1)).equals("-")) || ((entry.getText().toString().substring(entry.getText().toString().length()-1)).equals("×")) || (!(entry.getText().toString().substring(entry.getText().toString().length()-1)).equals("÷"))) {
-						if(!(text.getText().toString().equals(""))) 
-							counter =0; 
-					}
-				}
 				if(entry.getText().toString().equals("Infinity")) {
 					entry.setText("");
 					counter=0;
@@ -510,13 +504,6 @@ public class Calculator extends JFrame {
 				divOpener = false; 
 				perOpener = false; 
 				
-
-				if (counter>=1) {
-					if((!(entry.getText().substring(entry.getText().toString().length()-1)).equals("+")) || (!(entry.getText().toString().substring(entry.getText().toString().length()-1)).equals("-")) || ((entry.getText().toString().substring(entry.getText().toString().length()-1)).equals("×")) || (!(entry.getText().toString().substring(entry.getText().toString().length()-1)).equals("÷"))) {
-						if(!(text.getText().toString().equals(""))) 
-							counter =0; 
-					}
-				}
 				if(entry.getText().toString().equals("Infinity")) {
 					entry.setText("");
 					counter=0;
@@ -552,12 +539,6 @@ public class Calculator extends JFrame {
 				divOpener = false; 
 				perOpener = false; 
 				
-				if (counter>=1) {
-					if((!(entry.getText().substring(entry.getText().toString().length()-1)).equals("+")) || (!(entry.getText().toString().substring(entry.getText().toString().length()-1)).equals("-")) || ((entry.getText().toString().substring(entry.getText().toString().length()-1)).equals("×")) || (!(entry.getText().toString().substring(entry.getText().toString().length()-1)).equals("÷"))) {
-						if(!(text.getText().toString().equals(""))) 
-							counter =0; 
-					}
-				}
 				if(entry.getText().toString().equals("Infinity")) {
 					entry.setText("");
 					counter=0;
@@ -592,8 +573,7 @@ public class Calculator extends JFrame {
 					
 					
 				}
-				else if(counter>=1 && ((text.getText().toString()).equals(""))  ){
-					
+				if(counter>=1 && ((text.getText().toString()).equals(""))  ){
 					if(equaler==true) {
 						equalpH = Double.valueOf((entry.getText().toString()).substring(0,entry.getText().length()-1));
 						equaler = false;
@@ -614,7 +594,6 @@ public class Calculator extends JFrame {
 					else if((e_entry.substring(e_entry.length()-1)).equals("-") || (subOpener==true)) {
 						subOpener = true;
 						e_entry = entry.getText().toString();
-						e_entry = entry.getText().toString();
 						e_entry =e_entry.substring(0,e_entry.length()-1);
 						calcpH = Double.valueOf(e_entry);
 						calcpH = calcpH - equalpH;
@@ -623,7 +602,6 @@ public class Calculator extends JFrame {
 					}
 					else if((e_entry.substring(e_entry.length()-1)).equals("×") || (mulOpener==true)) {
 						mulOpener = true;
-						e_entry = entry.getText().toString();
 						e_entry = entry.getText().toString();
 						e_entry =e_entry.substring(0,e_entry.length()-1);
 						calcpH = Double.valueOf(e_entry);
@@ -651,6 +629,7 @@ public class Calculator extends JFrame {
 						calcpH = calcpH + (Double.valueOf(text.getText()));
 						entry.setText(String.valueOf(calcpH));
 						text.setText("");
+						counter = 0;
 						
 					}
 					else if((e_entry.substring(e_entry.length()-1)).equals("-")) {
@@ -659,6 +638,8 @@ public class Calculator extends JFrame {
 						calcpH = calcpH - (Double.valueOf(text.getText()));
 						entry.setText(String.valueOf(calcpH));
 						text.setText("");
+						counter = 0; 
+
 					}
 					else if((e_entry.substring(e_entry.length()-1)).equals("×")) {
 						e_entry =e_entry.substring(0,e_entry.length()-1);
@@ -666,6 +647,8 @@ public class Calculator extends JFrame {
 						calcpH = calcpH * (Double.valueOf(text.getText()));
 						entry.setText(String.valueOf(calcpH));
 						text.setText("");
+						counter = 0;
+
 					}
 					else if((e_entry.substring(e_entry.length()-1)).equals("÷") )  {
 			
@@ -674,6 +657,14 @@ public class Calculator extends JFrame {
 						calcpH = Double.valueOf(e_entry);
 						calcpH = calcpH / (Double.valueOf(text.getText()));
 						entry.setText(String.valueOf(calcpH));
+						text.setText("");
+						counter = 0;
+
+					}
+				}
+				else if((counter >= 1) || (counter == 0)) {
+					if ((!(text.getText().toString().equals(""))) && ((!(text.getText().toString().substring(text.getText().length()-1)).equals("+")) || (!(e_entry.substring(e_entry.length()-1)).equals("-")) || (!(e_entry.substring(e_entry.length()-1)).equals("×")) || (!(e_entry.substring(e_entry.length()-1)).equals("÷")))) {
+						entry.setText(text.getText().toString());
 						text.setText("");
 					}
 				}
